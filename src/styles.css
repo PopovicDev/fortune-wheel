@@ -1,0 +1,212 @@
+*, *:before, *:after {
+    margin: 0;
+    padding: 0;
+    box-sizing:border-box;
+}
+
+html{
+    height: 100%;
+    width:100%;
+}
+
+body{
+    height:100dvh;
+    width:100%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('./assets/background.jpg');
+}
+
+body::after{
+    content:'';
+    height:100dvh;
+    width:100%;
+    position:absolute;
+    background-color:rgba(0,0,0,0.80);
+    z-index:-1;
+}
+
+#root{
+    display:flex;
+    flex-direction: column;
+    text-align:center;
+    height:100dvh;
+    width:100%;
+}
+
+.title{
+    font-family: 'Mystery Quest', cursive;
+    color:rgb(32, 2, 8);
+    -webkit-text-stroke: 1px rgb(255, 215, 0);
+    padding-top:50px;
+    font-size:clamp(1.5rem, 10vw, 3rem);
+}
+
+.app{
+    display:flex;
+    height:100dvh;
+    width:100%;
+    justify-content: center;
+    align-items: center;
+    position:relative;
+}
+
+.fortune-wheel{
+    height:clamp(200px, 60vw, 500px);
+    width:clamp(200px, 60vw, 500px);
+    background-image:url('./assets/fortune-wheel.png');
+    background-position: center;
+    border-radius:50%;
+    animation:still 10s linear infinite;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+    transition: box-shadow 0.5s ease-in-out;
+}
+
+.fortune-wheel:hover {
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+}
+
+button{
+    width:clamp(150px, 40vw, 200px);
+    height:clamp(30px, 10vw, 60px);
+    font-family: 'Mystery Quest', cursive;
+    background-color:rgb(32, 2, 8);
+    border:1px solid rgb(255, 215, 0);
+    outline:none;
+    color:rgb(255, 255, 255);
+    cursor:pointer;
+    transition: transform 2s, top 1s, box-shadow 0.5s;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.startButton{
+    position: absolute;
+    left:50%;
+    top:50%;
+    transform: translate(-62%, -50%);
+}
+
+button:hover{
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+}
+
+.disabledButton{
+    top:80%;
+    transform:translate(-62%, 50%);
+}
+
+.arrow{
+    font-size:clamp(2rem, 10vw, 4rem);
+    color:rgb(255, 215, 0);
+    transform:rotate(180deg);
+}
+
+.arrow-container{
+    transform:translateX(30px);
+}
+
+.stopWheel{
+    animation:unset;
+    transform:rotate(0deg);
+    transition: transform 4.5s ease-in-out;
+}
+
+.moveArrow{
+    animation:arrow 300ms linear infinite;
+}
+
+.arrcMove{
+    animation:arcc-move 4.5s ease-out forwards;
+}
+
+.message{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap:15px;
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    height:100dvh;
+    width:100%;
+    background-color:rgba(30, 2, 8, 0.97);
+    font-family: 'Mystery Quest', cursive;
+    color:rgb(255, 255, 255);
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+    font-size:clamp(0.75rem, 5vw, 1.25rem);
+}
+
+@keyframes still {
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes arrow{
+    0%{
+        transform:rotate(180deg);
+    }
+    50%{
+        transform:rotate(150deg);
+    }
+    100%{
+        transform:rotate(180deg);
+    }
+}
+
+@keyframes arcc-move{
+    0%{
+        transform:translateX(30px);
+    }
+    10%{
+        transform:translateX(0px);
+    }
+    90%{
+        transform:translateX(0px);
+    }
+    100%{
+        transform:translateX(30px);
+    }
+}
+
+@media only screen and (max-width:400px){
+    .arrow-container{
+        transform:translateX(15px);
+    }
+
+    @keyframes arcc-move{
+        0%{
+            transform:translateX(15px);
+        }
+        10%{
+            transform:translateX(0px);
+        }
+        90%{
+            transform:translateX(0px);
+        }
+        100%{
+            transform:translateX(15px);
+        }
+    }
+
+    .message{
+        padding:15px;
+    }
+
+    .disabledButton{
+        top:70%;
+        transform:translate(-62%, 0%);
+    }
+}
+
+@media only screen and (min-width:768px){
+    .disabledButton{
+        top:85%;
+    }
+}
